@@ -9,6 +9,11 @@ const
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+/****** 
+Test your webhook  verification by substituting your verify token into this cURL request:
+	curl -X GET "localhost:1337/webhook?hub.verify_token=<YOUR_VERIFY_TOKEN>&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
+*******/
+
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
  
@@ -35,6 +40,10 @@ app.post('/webhook', (req, res) => {
 
 });
 
+/****** 
+Test your webhook by sending this cURL request:
+	curl -H "Content-Type: application/json" -X POST "localhost:1337/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
+*******/
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
